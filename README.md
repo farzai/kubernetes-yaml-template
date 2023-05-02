@@ -28,4 +28,3 @@ We welcome contributions to this repository. Please feel free to submit a pull r
 ## License
 
 This repository is licensed under the [MIT License](LICENSE).
-```
