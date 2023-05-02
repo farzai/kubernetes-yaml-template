@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: development
+  name: mywebsite-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mywebsite-api
+  template:
+    metadata:
+      labels:
+        app: mywebsite-api
+    spec:
+      nodeSelector:
+        eks.amazonaws.com/nodegroup: "development"
+        kubernetes.io/os: linux
+      containers:
+        - name: api
+          image: xxxxxxxx.dkr.ecr.ap-southeast-1.amazonaws.com/mywebsite-api:dev
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          imagePullPolicy: Always

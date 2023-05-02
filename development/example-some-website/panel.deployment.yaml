@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: development
+  name: mywebsite-back-office
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mywebsite-back-office
+  template:
+    metadata:
+      labels:
+        app: mywebsite-back-office
+    spec:
+      nodeSelector:
+        eks.amazonaws.com/nodegroup: "development"
+        kubernetes.io/os: linux
+      containers:
+        - name: web
+          image: 074531296166.dkr.ecr.ap-southeast-1.amazonaws.com/mywebsite-back-office:dev
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          imagePullPolicy: Always
